@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 class Conversor extends JFrame implements ActionListener{
 
-	JTextField caja1,caja2;
+	JTextField caja1,cajaRes;
 	JComboBox<String> temps1,temps2;
 	
 	public Conversor() {
@@ -36,26 +36,63 @@ class Conversor extends JFrame implements ActionListener{
 		
 		add(new JLabel("="));
 		
-		caja2 = new JTextField(5);
-		caja2.addActionListener(this);
-		add(caja2);
-		
-		
-		
+		cajaRes = new JTextField(5);
+		cajaRes.addActionListener(this);
+		add(cajaRes);
 		
 	}
-	
-	
-	
+
 	
 	
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent e) {
 	
+		String tC [] = {"°Fahrenheit", "°Kelvin", "°Rankine"};
+		if(e.getSource() == temps1) {
+			temps2.removeAllItems();
+			if(temps1.getSelectedItem().equals("°Centigrados")) {
+				for( String x : tC)
+					temps2.addItem(x);
+			}
+		}
 		
-	}
+		
+		String tF [] = {"°Centigrados", "°Kelvin", "°Rankine"};
+		if(e.getSource() == temps1) {
+			temps2.removeAllItems();
+			if(temps1.getSelectedItem().equals("°Fahrenheit")) {
+				for( String x : tF)
+					temps2.addItem(x);
+			}
+		}
+		
+		
+		String tK [] = {"°Centigrados", "°Fahrenheit", "°Rankine"};
+		if(e.getSource() == temps1) {
+			temps2.removeAllItems();
+			if(temps1.getSelectedItem().equals("°Kelvin")) {
+				for( String x : tK)
+					temps2.addItem(x);
+			}
+		}
+		
+		
+		String tR [] = {"°Centigrados", "°Fahrenheit", "°Kelvin"};
+		if(e.getSource() == temps1) {
+			temps2.removeAllItems();
+			if(temps1.getSelectedItem().equals("°Rankine")) {
+				for( String x : tR)
+					temps2.addItem(x);
+			}
+		}
+		
 	
-}
+	
+	
+	}//actionP
+	
+	
+}//class
 
 
 public class PruebaConversorTemperaturas {
