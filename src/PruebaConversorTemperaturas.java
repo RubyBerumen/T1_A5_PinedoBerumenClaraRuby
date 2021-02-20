@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 class Conversor extends JFrame implements ActionListener{
 
@@ -21,6 +23,17 @@ class Conversor extends JFrame implements ActionListener{
 		
 		caja1 = new JTextField(5);
 		caja1.addActionListener(this);
+		caja1.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent ke) {
+                String value = caja1.getText();
+                int code=ke.getKeyCode();
+                if ((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9')||(!value.contains(".")&&ke.getKeyChar()=='.')||(code==KeyEvent.VK_BACK_SPACE)) {
+                	caja1.setEditable(true);
+                }else{
+                	caja1.setEditable(false);
+                }
+            }
+        });
 		add(caja1);
 		
 		String t1 [] = {"°Centigrados", "°Fahrenheit", "°Kelvin", "°Rankine"};
@@ -41,7 +54,6 @@ class Conversor extends JFrame implements ActionListener{
 		add(cajaRes);
 		
 	}
-
 	
 	
 	@Override
@@ -59,7 +71,8 @@ class Conversor extends JFrame implements ActionListener{
 				for( String x : tC)
 					temps2.addItem(x);
 				
-				double n1 = Double.parseDouble(caja1.getSelectedText());
+				
+				double n1 = Double.parseDouble(caja1.getText());
 				double res = 0.0;
 				if(temps2.getSelectedItem().equals("°Fahrenheit")) {
 					res = (n1*1.8)+32;
@@ -75,7 +88,7 @@ class Conversor extends JFrame implements ActionListener{
 				for( String x : tF)
 					temps2.addItem(x);
 				
-				double n1 = Double.parseDouble(caja1.getSelectedText());
+				double n1 = Double.parseDouble(caja1.getText());
 				double res = 0.0;
 				if(temps2.getSelectedItem().equals("°Centigrados")) {
 					res = ((n1-32)*(5/9));
@@ -91,7 +104,7 @@ class Conversor extends JFrame implements ActionListener{
 				for( String x : tK)
 					temps2.addItem(x);
 				
-				double n1 = Double.parseDouble(caja1.getSelectedText());
+				double n1 = Double.parseDouble(caja1.getText());
 				double res = 0.0;
 				if(temps2.getSelectedItem().equals("°Centigrados")) {
 					res = (n1-273.15);
@@ -107,7 +120,7 @@ class Conversor extends JFrame implements ActionListener{
 				for( String x : tR)
 					temps2.addItem(x);
 				
-				double n1 = Double.parseDouble(caja1.getSelectedText());
+				double n1 = Double.parseDouble(caja1.getText());
 				double res = 0.0;
 				if(temps2.getSelectedItem().equals("°Centigrados")) {
 					res = ((n1-491.67)*(5/9));
@@ -121,7 +134,6 @@ class Conversor extends JFrame implements ActionListener{
 			}
 		}
 		
-	
 	
 	
 	}//actionP
